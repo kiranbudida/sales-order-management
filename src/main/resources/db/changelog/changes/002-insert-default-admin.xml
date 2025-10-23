@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Insert default roles -->
+    <changeSet id="1" author="kiran">
+        <insert tableName="roles">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="ADMIN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="USER"/>
+        </insert>
+    </changeSet>
+
+    <!-- Insert default admin user -->
+    <changeSet id="2" author="kiran">
+        <insert tableName="users">
+            <column name="id" valueNumeric="1"/>
+            <column name="username" value="admin"/>
+            <!-- BCrypt hash for password "admin123" -->
+            <column name="password" value="$2a$10$FhDQykZJiQeTfUo.6Yq6XekVxL1HpeFxQpJxFsO84S8tZOH17gVnS"/>
+        </insert>
+    </changeSet>
+
+    <!-- Assign ADMIN role to default admin user -->
+    <changeSet id="3" author="kiran">
+        <insert tableName="user_roles">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="role_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
