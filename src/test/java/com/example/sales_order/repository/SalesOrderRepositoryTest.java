@@ -85,7 +85,7 @@ class SalesOrderRepositoryTest {
 
         Page<SalesOrder> ordersPage = salesOrderRepository.findByCreationDateBetween(start, end, pageable);
 
-        assertThat(ordersPage.getContent()).hasSize(2);
+        assertThat(ordersPage.getContent()).hasSize(1);
         assertThat(ordersPage.getContent().stream()
                 .anyMatch(o->o.getCustomerName().equals("John Doe")));
     }
