@@ -26,7 +26,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ActiveProfiles("test")
 @Transactional
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class SalesOrderRepositoryTest {
 
@@ -87,6 +86,6 @@ class SalesOrderRepositoryTest {
 
         assertThat(ordersPage.getContent()).hasSize(1);
         assertThat(ordersPage.getContent().stream()
-                .anyMatch(o->o.getCustomerName().equals("John Doe")));
+                .anyMatch(o->o.getCustomerName().equals("John Doe"))).isTrue();
     }
 }
