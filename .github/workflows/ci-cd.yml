@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+# Run this workflow on push and pull request events
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # Step 3: Start Docker (Testcontainers)
+      - name: Start Docker
+        run: |
+          docker info
+
+      # Step 4: Build the project
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=false
